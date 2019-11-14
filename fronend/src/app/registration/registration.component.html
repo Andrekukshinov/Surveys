@@ -1,0 +1,108 @@
+<div style="background-color: rgba(72, 97, 193, 0.4);"><div class="row" style="width: 100%;">
+  <div class="col-md-4"><p></p>
+    <p></p></div>
+  <div class="col-md-4"></div>
+  <div class="col-md-4"></div>
+</div>
+<form class="my-form ">
+  <div class="cotainer">
+    <div class="row justify-content-center" style="width: 100%;">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">Register</div>
+          <div class="card-body">
+            <form [formGroup]="registerForm" name="my-form" onsubmit="return validform()" method="post"
+                  oninput='up2.setCustomValidity(up2.value != up.value ? "Passwords do not match." : "")'>
+              <div class="form-group row" style="height: 44px"></div>
+              <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right">Full Name</label>
+                <div class="col-md-6">
+                  <input type="text"  class="form-control"
+                         name="full-name" formControlName='name' [ngClass]="
+                         {'is-valid':(registerForm.get('name').valid),
+                         'is-invalid': registerForm.get('name').touched && (registerForm.get('name').invalid)}" >
+                  <div class="invalid-feedback">
+                    <div>Name is required</div>
+                  </div>
+                  <div class="valid-feedback">
+                    <div>okay</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="user_name" class="col-md-4 col-form-label text-md-right">User Name</label>
+                <div class="col-md-6">
+                  <input type="text" id="user_name" class="form-control"
+                         name="username" formControlName="surname" [ngClass]="
+                         {'is-valid':(registerForm.get('surname').valid),
+                         'is-invalid':registerForm.get('surname').touched && (registerForm.get('surname').invalid)}">
+                  <div class="invalid-feedback">
+                    <div>Surname is required</div>
+                  </div>
+                  <div class="valid-feedback">
+                    <div>okay</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="username" class="col-md-4 col-form-label text-md-right">E-mail
+                  address:</label>
+                <div class="col-md-6">
+                  <input id="username" class="form-control" type=email
+                         required name=un formControlName="email" [ngClass]="
+                         {'is-valid':(registerForm.get('email').valid),
+                         'is-invalid':registerForm.get('email').touched && (registerForm.get('email').invalid)}">
+                  <div class="invalid-feedback">
+                    <div>Email is invalid</div>
+                  </div>
+                  <div class="valid-feedback">
+                    <div>okay</div>
+                  </div>
+                </div>
+                </div>
+              <div class="form-group row">
+                <label for="password1" class="col-md-4 col-form-label text-md-right">Password:</label>
+                <div class="col-md-6">
+                  <input id="password1" class="form-control" type=password required
+                         name=up formControlName="pass" [ngClass]="
+                         {'is-valid':(registerForm.get('pass').valid),
+                         'is-invalid':registerForm.get('pass').touched && (registerForm.get('pass').invalid)}">
+                  <div class="invalid-feedback">
+                    <div>Password must be at least 6 characters long</div>
+                  </div>
+                  <div class="valid-feedback">
+                    <div>okay</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="password2" class="col-md-4 col-form-label text-md-right">Confirm
+                  password:</label>
+                <div class="col-md-6">
+                  <input id="password2" class="form-control" type=password
+                         name=up2 formControlName="repeatPass"[ngClass]="
+                         {'is-valid':(registerForm.get('repeatPass').valid),
+                          'is-invalid':registerForm.get('repeatPass').touched && (registerForm.get('repeatPass').invalid)}">
+                  <div class="invalid-feedback">
+                    <div>Password must be at least 6 characters long</div>
+                  </div>
+                  <div class="valid-feedback">
+                    <div>okay</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 offset-md-4">
+                <p>
+                  <input type=submit value="Create account" [disabled]="registerForm.invalid">
+              </div>
+              <div class="form-group row" style="height: 40px"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</form>
+<app-tabulation></app-tabulation>
+</div>

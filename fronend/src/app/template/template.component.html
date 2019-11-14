@@ -1,0 +1,32 @@
+<div class="container">
+  <app-bread-scrum></app-bread-scrum>
+  <h2>Машины</h2>
+  <p>Выберете доступный вам опрос:</p>
+  <table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th>Название опроса</th>
+      <th>Количество вопросов</th>
+      <th>Время на прохождение</th>
+      <th>Время до конца доступности</th>
+      <th>Автор</th>
+      <th>Доступен без регистрации</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of usersSurveys; let index=index">
+      <td><a routerLink="/survey">Опрос {{index+1}}</a></td>
+      <td>{{user.numberOfQuestions }} </td>
+      <td>{{user.timeForSurvey}} мин</td>
+      <td>{{user.timeTillSurveyExpire}} дн</td>
+      <td>{{user.author}}</td>
+      <td>{{user.availableForGuests}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <app-tabulation></app-tabulation>
+  <ngb-pagination [collectionSize]="collectionSize()" [pageSize]="pageItems"
+                  [(page)]="page" [maxSize]="5" [rotate]="true"
+                  [ellipses]="false" [boundaryLinks]="true" (pageChange)="toChangePage()">
+  </ngb-pagination>
+</div>

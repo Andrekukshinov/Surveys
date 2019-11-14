@@ -1,0 +1,131 @@
+<div class="container-fluid ">
+  <div class="row content" style="height: 150%">
+    <div class="col-sm-3 sidenav" style="height: 100%">
+      <h4>Name Surname</h4>
+      <hr>
+      <app-successful-surveys></app-successful-surveys>
+      <hr>
+      <h4>Предложить собственный опрос:</h4>
+      <form role="form">
+        <br>
+        <button type="button" class="btn btn-primary" (click)="changeVisibility()" data-toggle="modal">
+          Create a survey
+        </button>
+        <app-admin-block ></app-admin-block>
+      </form>
+    </div>
+    <div class="col-sm-9 backgroundImageForUsers"
+         style="border-left:ridge; background-color:rgba(255,94,130,0.36) ">
+      <h4><small>Последние пройденные опросы</small></h4>
+      <hr>
+      <app-complited-survey></app-complited-survey>
+      <app-complited-survey></app-complited-survey>
+      <br><br>
+    </div>
+  </div>
+</div>
+<div *ngIf="isShown">
+  <div class="myOwnModal">
+    <div class="modal-header">
+      <h4 class="modal-title">New survey form</h4>
+      <button type="button" class="close" aria-label="Close" (click)="changeVisibility()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body scrollableModal">
+      <div class="modal-body">
+        <div class="row">
+          <br>
+          <br>
+          <form class="col-md-12" [formGroup]="surveyInfoGroup">
+            <div formArrayName="questions">
+              <div *ngFor="let templateQuestion of surveyInfoGroup.controls.questions.controls;
+              let currentQuestionIndex = index">
+                <div [formGroup]="templateQuestion">
+                  <label>Question
+                    <input formControlName="question">
+                  </label>
+                  <div *ngFor="let answer of templateQuestion.controls.answers.controls; let currentAnswerIndex = index">
+                    <div [formGroup]="answer">
+                      <button (click)="addAnswer(currentQuestionIndex)">Add answer</button>
+                      <label>Answer {{currentAnswerIndex+1}}
+                        <input formControlName="answer">
+                      </label>
+                      <button (click)="deleteThisAnswer(currentQuestionIndex, currentAnswerIndex)">x</button>
+                    </div>
+                  </div>
+                </div>
+                <button (click)="deleteThisQuestion(currentQuestionIndex)">Delete this question</button>
+                <br>
+                <hr>
+              </div>
+            </div>
+            <div *ngIf="questionsFromTheTopic">
+              <ng-container *ngFor="let activeQuestions of questionsFromTheTopic; let questId = index">
+                <br>
+                <input type="text" value="{{activeQuestions.questionField}}"/>
+                <br>
+                <ng-container *ngFor="let answer of activeQuestions.answers; let runner = index">
+                  <br>
+                  <label>Answer {{runner + 1}}</label>
+                  <br>
+                  <input type="text" value="{{answer}}">
+                  <br>
+                </ng-container>
+                <br>
+                <button class="btn myBtn" (click)="deleteQuestionById(questId)">Delete this question</button>
+                <br>
+                <hr>
+              </ng-container>
+            </div>
+          </form>
+          <div class="col-md-12">
+            <div id="questionTemplate"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button " class="btn btn-danger">Submit</button>
+            <button type="button" id="buttonQuest" (click)="addQuestion()" class="btn btn-danger">New
+              question
+            </button>
+      <button type="button " class="btn btn-danger" (click)="showQuestionTopics(); getTopics()">Add question(/s) from
+        the topic
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="questionTopicsShow">
+  <div class="modalForTopics">
+    <div class="modal-header">
+      <h4 class="modal-title">Choose a topic</h4>
+      <select class="custom-select" (change)="onSetActiveTopic(currentTopic.value)" #currentTopic>
+        <option>Pick a topic</option>
+        <option *ngFor="let singleTopic of topics; " [value]="singleTopic.topicId">
+          {{singleTopic.name}}
+        </option>
+      </select>
+      <button type="button" class="close" aria-label="Close" (click)="showQuestionTopics()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body scrollableTopicsModal">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+          </div>
+          <div class="col-md-12">
+            <app-question-from-the-topic [currentTopic]="activeTopic"></app-question-from-the-topic>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger">New
+        question
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,109 @@
+<br>
+<hr>
+<form class="col-md-12 " [formGroup]="questionControl">
+  <input type="text" class="form-control" placeholder="Question text" formControlName="question"
+         [ngClass]="{'is-valid':(questionControl.get('question').valid),
+                         'is-invalid': questionControl.get('question').touched &&
+                         (questionControl.get('question').invalid)}"/>
+  <div class="invalid-feedback">
+    <div>Field is required</div>
+  </div>
+</form>
+<br>
+<br>
+<div class="col-md-12 " style="position: relative">
+  <button style="position: absolute; right: 2px; top: 2px;" type="button" (click)="removeMe(index)">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div class="col-md-12"><p>Answer options</p></div>
+  <ngb-tabset #t="ngbTabset">
+    <ng-container *ngIf="showFirstOption">
+      <ngb-tab id="tab-selectbyid1" title="Multiple choices">
+        <ng-template ngbTabContent>
+          <div class="row topicsPrieview">
+            <form class="container tab-pane heightPane" [formGroup]="answersFormForCheckboxes"><br>
+                <div style="display: flex">
+                  <input type="radio"/>
+                  <input type="text" class="form-control" placeholder="Answer text" formControlName="answerForCheckbox1"
+                         [ngClass]="
+                         {'is-valid':(answersFormForCheckboxes.get('answerForCheckbox1').valid),
+                         'is-invalid': answersFormForCheckboxes.get('answerForCheckbox1').touched &&
+                         (answersFormForCheckboxes.get('answerForCheckbox1').invalid)}"/>
+                  <hr>
+                  <div class="invalid-feedback">
+                    <div>Field is required</div>
+                  </div>
+                </div>
+              <br>
+              <div style="display: flex">
+                <input type="radio"/>
+                <input type="text" class="form-control" placeholder="Answer text" formControlName="answerForCheckbox2"
+                       [ngClass]="
+                         {'is-valid':(answersFormForCheckboxes.get('answerForCheckbox2').valid),
+                         'is-invalid': answersFormForCheckboxes.get('answerForCheckbox2').touched &&
+                         (answersFormForCheckboxes.get('answerForCheckbox2').invalid)}"/>
+                <hr>
+                <div class="invalid-feedback">
+                  <div>Field is required</div>
+                </div>
+              </div>
+              <br>
+              <div style="display: flex">
+                <input type="radio"/>
+                <input type="text" class="form-control" placeholder="Answer text" formControlName="answerForCheckbox3"
+                       [ngClass]="
+                         {'is-valid':(answersFormForCheckboxes.get('answerForCheckbox3').valid),
+                         'is-invalid': answersFormForCheckboxes.get('answerForCheckbox3').touched &&
+                         (answersFormForCheckboxes.get('answerForCheckbox3').invalid)}"/>
+                <hr>
+                <div class="invalid-feedback">
+                  <div>Field is required</div>
+                </div>
+              </div>
+              <br>
+              <div class="col-md-3"></div>
+              <div class="col-md-3"></div>
+              <div class="col-md-3">
+                <button type="button" class="btn myBtn " (click)="destroySecondOption()">Switch to single choice
+                </button>
+                <br>
+              </div>
+              <div class="col-md-3"></div>
+            </form>
+          </div>
+        </ng-template>
+      </ngb-tab>
+    </ng-container>
+    <ng-container *ngIf="!showFirstOption">
+      <ngb-tab id="tab-selectbyid2">
+        <ng-template ngbTabTitle>My option</ng-template>
+        <ng-template ngbTabContent>
+          <div class="row topicsPrieview">
+            <form class="container tab-pane heightPane" [formGroup]="singleAnswers"><br>
+              <input type="text" class="form-control" placeholder="Answer text" formControlName="answer"
+                     [ngClass]="
+                         {'is-valid':(singleAnswers.get('answer').valid),
+                         'is-invalid': singleAnswers.get('answer').touched &&
+                         (singleAnswers.get('answer').invalid)}"/>
+              <div class="invalid-feedback">
+                <div>Field is required</div>
+              </div>
+              <br>
+              <div class="col-md-3"></div>
+              <div class="col-md-3"></div>
+              <div class="col-md-3">
+                <button type="button" class="btn myBtn" (click)="destroySecondOption()">Switch to multiple choices
+                </button>
+              </div>
+              <br>
+              <br>
+              <br>
+              <div class="col-md-3"></div>
+            </form>
+          </div>
+        </ng-template>
+      </ngb-tab>
+    </ng-container>
+  </ngb-tabset>
+</div>
+<br>

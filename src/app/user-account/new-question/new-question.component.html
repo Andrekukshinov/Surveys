@@ -1,0 +1,60 @@
+<div class="col-md-12 ">
+  <input type="text" placeholder="Вoпрос"/>
+</div>
+<br>
+<br>
+<div class="col-md-12 ">
+  <div class="col-md-12"><p>Варианты ответа</p></div>
+  <ngb-tabset #t="ngbTabset">
+    <ngb-tab id="tab-selectbyid1" title="Собственный вариант">
+      <ng-template ngbTabContent>
+        <div class="row topicsPrieview">
+          <div class="container tab-pane heightPane"><br>
+            <div class="col-md-12">
+              <input type="radio"/>
+              <input type="text" placeholder="Впрос">
+            </div>
+            <br>
+            <div class="col-md-12"><input type="radio"/>
+              <input type="text" placeholder="Впрос"></div>
+            <br>
+            <div class="col-md-12"><input type="radio"/>
+              <input type="text" placeholder="Впрос"></div>
+            <br>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+              <button type="button" class="btn myBtn ">Подтвердить
+              </button>
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id="tab-selectbyid2">
+      <ng-template ngbTabTitle>Вариант из списка</ng-template>
+      <ng-template ngbTabContent>
+        <div class="row topicsPrieview">
+          <div class="container tab-pane heightPane"><br>
+            <input type="text" placeholder="Впрос">
+            <br>
+            <br>
+            <br>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+              <button type="button" class="btn myBtn">Подтвердить
+              </button>
+            </div>
+            <br>
+            <br>
+            <br>
+            <div class="col-md-3"></div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>
+

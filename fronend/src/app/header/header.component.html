@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="navbar-brand" style="color:white; height:110%">Surveys</div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">
+          <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link navBtn" routerLink="topics">Topics</a>
+      </li>
+      <li>
+        <div class="btn-group ">
+          <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+            <button class="btn navBtn" ngbDropdownToggle>Go to</button>
+<!--            как в тс получить ширину экрана и в зав от нее изменить дропдаун-->
+            <div class="dropdown-menu" ngbDropdownMenu>
+              <div class="nav-item">
+                <a class="nav-link" routerLink="user-account">My Account</a>
+              </div>
+              <div class="nav-item">
+                <a class="nav-link" routerLink="">Welcome Page</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <app-left-nav></app-left-nav>
+  </div>
+</nav>
+<form id="registr">
+  <div class="form-group">
+    <label for="usr">Логин:</label>
+    <input type="text" class="form-control" id="usr">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Пароль:</label>
+    <input type="password" class="form-control" id="pwd">
+    <button type="submit" class="btn s btn-default">Войти</button>
+    <button type="button" onclick="registr.style.visibility='hidden'" class=" btns btn btn-primary">Закрыть</button>
+    <div class="checkbox">
+      <label><input type="checkbox" name="remember"> Запомнить меня</label>
+    </div>
+  </div>
+</form>

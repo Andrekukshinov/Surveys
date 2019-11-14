@@ -1,0 +1,83 @@
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <p>Вы зашли как администратор.</p>
+  </div>
+  <div class="col-md-12">
+    <p>Посмотреть все пользовательские опросы:</p>
+  </div>
+  <div class="col-md-12">
+    <button type="button" class="btn btn-outline-primary mb-2 mr-2" (click)="openXl(usersSurveys)">
+      Open Users' Surveys
+    </button>
+  </div>
+  <div class="col-md-12">
+    <p>You can create and share a topic here: </p>
+    <button type="button" class="btn adminTopicButton btn-outline-primary mb-2 mr-2"
+            (click)="openWindowCustomClass(adminTopics)">
+      Create a topic
+    </button>
+  </div>
+</div>
+
+<app-tabulation></app-tabulation>
+<ng-template #usersSurveys let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Пользовательские опросы</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-users-surveys (dismissTheModal)="modal.close()"></app-users-surveys>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+<ng-template #adminTopics let-modal class="dark-modal">
+  <form style=" background-color: #292b2c;color: white;">
+    <div class="modal-header">
+      <h4 class="modal-title">Modal title</h4>
+      <select class="custom-select" (change)="onSetActiveTopic(targetedTopic.value)" #targetedTopic>
+        <option> Choose a topic</option>
+        <option *ngFor="let theTopic of topics" [value]="theTopic.topicId">
+          {{theTopic.name}}
+        </option>
+      </select>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form class="col-md-12" [formGroup]="surveyInfoGroup">
+        <div formArrayName="questions">
+          <div *ngFor="let templateQuestion of surveyInfoGroup.controls.questions.controls;
+              let currentQuestionIndex = index">
+            <div [formGroup]="templateQuestion">
+              <label>Question
+                <input formControlName="question">
+              </label>
+              <div *ngFor="let answer of templateQuestion.controls.answers.controls; let currentAnswerIndex = index">
+                <div [formGroup]="answer">
+                  <button (click)="addAnswer(currentQuestionIndex)">Add answer</button>
+                  <label>Answer {{currentAnswerIndex + 1}}
+                    <input formControlName="answer">
+                  </label>
+                  <button (click)="deleteThisAnswer(currentQuestionIndex, currentAnswerIndex)">x</button>
+                </div>
+              </div>
+            </div>
+            <button (click)="deleteThisQuestion(currentQuestionIndex)">Delete this question</button>
+            <br>
+            <hr>
+          </div>
+          <button (click)="addQuestion()">add question</button>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </form>
+</ng-template>

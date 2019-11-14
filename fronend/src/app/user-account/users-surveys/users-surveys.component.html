@@ -1,0 +1,26 @@
+<table class="table table-striped table-hover">
+  <thead>
+  <tr>
+    <th>Название опроса</th>
+    <th>Количество вопросов</th>
+    <th>Время на прохождение</th>
+    <th>Время до конца доступности</th>
+    <th>Автор</th>
+    <th>Доступен без регистрации</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of usersSurveys; let index=index">
+    <td><a routerLink="/survey" (click)="dissmissingTheModal()">Опрос {{index+1}}</a></td>
+    <td>{{user.numberOfQuestions }} </td>
+    <td>{{user.timeForSurvey}} мин</td>
+    <td>{{user.timeTillSurveyExpire}} дн</td>
+    <td>{{user.author}}</td>
+    <td>{{user.availableForGuests}}</td>
+  </tr>
+  </tbody>
+</table>
+<ngb-pagination [collectionSize]="collectionSize()" [pageSize]="pageItems"
+                [(page)]="page" [maxSize]="5" [rotate]="true"
+                [ellipses]="false" [boundaryLinks]="true" (pageChange)="toChangePage()">
+</ngb-pagination>
