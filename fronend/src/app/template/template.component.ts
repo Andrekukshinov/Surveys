@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {UsersTables, UsersTablesIfAdminService} from '../users-tables-if-admin.service';
+import {UsersTables, SurveysService} from '../services/surveys.service';
 
 @Component({
   selector: 'app-template',
@@ -10,7 +10,7 @@ export class TemplateComponent implements OnInit {
   private pageItems = 4;
   public usersSurveys: UsersTables[];
   private page: number;
-  constructor(private userTables: UsersTablesIfAdminService) {
+  constructor(private userTables: SurveysService) {
     this.page = 1;
     this.loadPage();
   }

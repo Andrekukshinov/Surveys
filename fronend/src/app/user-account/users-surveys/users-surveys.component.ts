@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {UsersTables, UsersTablesIfAdminService} from '../../users-tables-if-admin.service';
+import {UsersTables, SurveysService} from '../../services/surveys.service';
 
 @Component({
   selector: 'app-users-surveys',
@@ -11,7 +11,7 @@ export class UsersSurveysComponent implements OnInit {
   public usersSurveys: UsersTables[];
   private page: number;
   @Output() dismissTheModal = new EventEmitter();
-  constructor(private userTables: UsersTablesIfAdminService) {
+  constructor(private userTables: SurveysService) {
     this.page = 1;
     this.loadPage();
   }

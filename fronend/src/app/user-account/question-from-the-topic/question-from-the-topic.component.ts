@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {TopicsForUsers, TopicsForUsersService} from '../../topics-for-users.service';
+import {TopicsForUsersService} from '../../services/topics-for-users.service';
 import {Subscription} from 'rxjs';
+import {TopicsForUsers} from '../../models/topics';
 
 @Component({
   selector: 'app-question-from-the-topic',

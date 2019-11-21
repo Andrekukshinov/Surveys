@@ -1,3 +1,31 @@
+<div id="registr">
+  <div class="row ">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 myRegistrForm">
+      <div class="row">
+        <div class="col-md-12">
+<!--          <div class="form-group">-->
+            <label for="usr">Логин:</label>
+            <input type="text" class="form-control1" id="usr">
+<!--          </div>-->
+<!--          <div class="form-group">-->
+            <label for="pwd">Пароль:</label>
+            <input type="password" class="form-control1" id="pwd">
+            <br>
+            <button type="submit" class="btn btn-default">Войти</button>
+            <button type="button" onclick="registr.style.visibility='hidden'" class=" btns btn btn-primary">Закрыть
+            </button>
+            <div class="checkbox">
+              <br>
+              <label><input type="checkbox" name="remember"> Запомнить меня</label>
+            </div>
+<!--          </div>-->
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="navbar-brand" style="color:white; height:110%">Surveys</div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -18,7 +46,7 @@
         <div class="btn-group ">
           <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
             <button class="btn navBtn" ngbDropdownToggle>Go to</button>
-<!--            как в тс получить ширину экрана и в зав от нее изменить дропдаун-->
+            <!--            как в тс получить ширину экрана и в зав от нее изменить дропдаун-->
             <div class="dropdown-menu" ngbDropdownMenu>
               <div class="nav-item">
                 <a class="nav-link" routerLink="user-account">My Account</a>
@@ -34,18 +62,3 @@
     <app-left-nav></app-left-nav>
   </div>
 </nav>
-<form id="registr">
-  <div class="form-group">
-    <label for="usr">Логин:</label>
-    <input type="text" class="form-control" id="usr">
-  </div>
-  <div class="form-group">
-    <label for="pwd">Пароль:</label>
-    <input type="password" class="form-control" id="pwd">
-    <button type="submit" class="btn s btn-default">Войти</button>
-    <button type="button" onclick="registr.style.visibility='hidden'" class=" btns btn btn-primary">Закрыть</button>
-    <div class="checkbox">
-      <label><input type="checkbox" name="remember"> Запомнить меня</label>
-    </div>
-  </div>
-</form>

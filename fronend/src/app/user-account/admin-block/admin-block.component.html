@@ -19,7 +19,6 @@
     </button>
   </div>
 </div>
-
 <app-tabulation></app-tabulation>
 <ng-template #usersSurveys let-modal>
   <div class="modal-header">
@@ -39,17 +38,60 @@
   <form style=" background-color: #292b2c;color: white;">
     <div class="modal-header">
       <h4 class="modal-title">Modal title</h4>
-      <select class="custom-select" (change)="onSetActiveTopic(targetedTopic.value)" #targetedTopic>
-        <option> Choose a topic</option>
-        <option *ngFor="let theTopic of topics" [value]="theTopic.topicId">
-          {{theTopic.name}}
-        </option>
-      </select>
+      <ng-container *ngIf="topicFromList">
+        <div class="row">
+          <div class="col-md-12">
+            <select class="custom-select1" (change)="onSetActiveTopic(targetedTopic.value)" #targetedTopic>
+              <option> Choose a topic</option>
+              <option *ngFor="let theTopic of topics" [value]="theTopic.topicId">
+                {{theTopic.name}}
+                {{theTopic.topicId}}
+              </option>
+            </select>
+          </div>
+          <div class="com-md-12">
+            <br>
+            <br>
+          </div>
+          <div class="col-md-12">
+            <button type="button" (click)="changeOption()">create a new topic</button>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="createATopic">
+        <div class="row">
+          <div class="col-md-12 somePaddings">
+            <form [formGroup]="coverForTopicValidator">
+              Topic name:
+              <input type="text" formControlName="topicValidator" [ngClass]="
+                         {'is-valid':(coverForTopicValidator.get('topicValidator').valid)}">
+              <div class="invalid-feedback">
+                <div>Name is required</div>
+              </div>
+              <div class="valid-feedback">
+                <div>okay</div>
+              </div>
+            </form>
+          </div>
+          <div class="com-md-12 somePaddings2">
+            <label>
+              <input type="checkbox" (change)="makeTheTopicPrivate()">
+              Make topic private
+            </label>
+          </div>
+          <div class="col-md-12 somePaddings">
+            <button type="button" (click)="changeOption()">add to an existing topic</button>
+          </div>
+        </div>
+      </ng-container>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="modal-body">
+    <div class="modal-body scrollableTopicsModal">
+      <ng-container *ngIf="activeTopic && topicFromList">
+        <!--        <div *ngFor="let question of "></div>-->
+      </ng-container>
       <form class="col-md-12" [formGroup]="surveyInfoGroup">
         <div formArrayName="questions">
           <div *ngFor="let templateQuestion of surveyInfoGroup.controls.questions.controls;
@@ -77,6 +119,12 @@
       </form>
     </div>
     <div class="modal-footer">
+      <ng-container *ngIf="topicFromList">
+        <button type="submit" class="btn btn-light" (click)="updateTopic(); modal.close('Close click')">Update topic</button>
+      </ng-container>
+      <ng-container *ngIf="createATopic">
+        <button class="btn btn-light" (click)="createTopic(); modal.close('Close click')">Create topic</button>
+      </ng-container>
       <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
     </div>
   </form>

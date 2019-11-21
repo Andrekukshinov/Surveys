@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {UsersTables, UsersTablesIfAdminService} from '../users-tables-if-admin.service';
+import {UsersTables, SurveysService} from '../services/surveys.service';
 
 @Component({
   selector: 'app-topics',
@@ -7,7 +7,7 @@ import {UsersTables, UsersTablesIfAdminService} from '../users-tables-if-admin.s
   styleUrls: ['./topics.component.css']
 })
 export class TopicsComponent implements OnInit {
-  constructor(private userTables: UsersTablesIfAdminService) {}
+  constructor(private userTables: SurveysService) {}
   ngOnInit() {
   }
 }

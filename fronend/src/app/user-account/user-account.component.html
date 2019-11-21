@@ -1,30 +1,4 @@
-<div class="container-fluid ">
-  <div class="row content" style="height: 150%">
-    <div class="col-sm-3 sidenav" style="height: 100%">
-      <h4>Name Surname</h4>
-      <hr>
-      <app-successful-surveys></app-successful-surveys>
-      <hr>
-      <h4>Предложить собственный опрос:</h4>
-      <form role="form">
-        <br>
-        <button type="button" class="btn btn-primary" (click)="changeVisibility()" data-toggle="modal">
-          Create a survey
-        </button>
-        <app-admin-block ></app-admin-block>
-      </form>
-    </div>
-    <div class="col-sm-9 backgroundImageForUsers"
-         style="border-left:ridge; background-color:rgba(255,94,130,0.36) ">
-      <h4><small>Последние пройденные опросы</small></h4>
-      <hr>
-      <app-complited-survey></app-complited-survey>
-      <app-complited-survey></app-complited-survey>
-      <br><br>
-    </div>
-  </div>
-</div>
-<div *ngIf="isShown">
+<div *ngIf="isShown" class="newSurvey">
   <div class="myOwnModal">
     <div class="modal-header">
       <h4 class="modal-title">New survey form</h4>
@@ -42,13 +16,26 @@
               <div *ngFor="let templateQuestion of surveyInfoGroup.controls.questions.controls;
               let currentQuestionIndex = index">
                 <div [formGroup]="templateQuestion">
-                  <label>Question
-                    <input formControlName="question">
-                  </label>
-                  <div *ngFor="let answer of templateQuestion.controls.answers.controls; let currentAnswerIndex = index">
+                  <div class="row">
+                    <div class="col-md-8"><label>Choose topic to attach question to</label></div>
+                    <div class="col-md-10">
+                      <select class="custom-select">
+                        <option>-none-</option>
+                        <option *ngFor="let activeTopicForUserQuestion of topics; " >
+                          {{activeTopicForUserQuestion.name}}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-md-12"><br></div>
+                    <label>Question
+                      <input formControlName="question">
+                    </label>
+                  </div>
+                  <div
+                    *ngFor="let answer of templateQuestion.controls.answers.controls; let currentAnswerIndex = index">
                     <div [formGroup]="answer">
                       <button (click)="addAnswer(currentQuestionIndex)">Add answer</button>
-                      <label>Answer {{currentAnswerIndex+1}}
+                      <label>Answer {{currentAnswerIndex + 1}}
                         <input formControlName="answer">
                       </label>
                       <button (click)="deleteThisAnswer(currentQuestionIndex, currentAnswerIndex)">x</button>
@@ -61,21 +48,27 @@
               </div>
             </div>
             <div *ngIf="questionsFromTheTopic">
-              <ng-container *ngFor="let activeQuestions of questionsFromTheTopic; let questId = index">
-                <br>
-                <input type="text" value="{{activeQuestions.questionField}}"/>
-                <br>
-                <ng-container *ngFor="let answer of activeQuestions.answers; let runner = index">
+              <ng-container *ngFor="let activeQuestions of
+              questionFromTheTopicGroup.get('questions').controls; let questId = index">
+                <form class="col-md-12" [formGroup]="activeQuestions">
                   <br>
-                  <label>Answer {{runner + 1}}</label>
+                  <input type="text"  formControlName="question">
                   <br>
-                  <input type="text" value="{{answer}}">
+                  <ng-container *ngFor="let answerActive of activeQuestions.controls.answers.controls;
+                   let runner = index">
+                    <div [formGroup]="answerActive">
+                      <br>
+                      <label>Answer {{runner + 1}}</label>
+                      <br>
+                      <input type="text" formControlName="answer">
+                      <br>
+                    </div>
+                  </ng-container>
                   <br>
-                </ng-container>
-                <br>
-                <button class="btn myBtn" (click)="deleteQuestionById(questId)">Delete this question</button>
-                <br>
-                <hr>
+                  <button class="btn myBtn" (click)="deleteQuestionById(questId)">Delete this question</button>
+                  <br>
+                  <hr>
+                </form>
               </ng-container>
             </div>
           </form>
@@ -87,17 +80,17 @@
     </div>
     <div class="modal-footer">
       <button type="button " class="btn btn-danger">Submit</button>
-            <button type="button" id="buttonQuest" (click)="addQuestion()" class="btn btn-danger">New
-              question
-            </button>
-      <button type="button " class="btn btn-danger" (click)="showQuestionTopics(); getTopics()">Add question(/s) from
+      <button type="button" id="buttonQuest" (click)="addQuestion()" class="btn btn-danger">New
+        question
+      </button>
+      <button type="button" (click)="getFullInfoFromTheGroup()">Save as a draft</button>
+      <button type="button " class="btn btn-danger" (click)="showQuestionTopics()">Add question(/s) from
         the topic
       </button>
     </div>
   </div>
 </div>
-
-<div *ngIf="questionTopicsShow">
+<div *ngIf="questionTopicsShow" class="newQuestionFromSurvey">
   <div class="modalForTopics">
     <div class="modal-header">
       <h4 class="modal-title">Choose a topic</h4>
@@ -129,3 +122,34 @@
     </div>
   </div>
 </div>
+
+<div class="container-fluid ">
+  <div class="row content" style="height: 150%">
+    <div class="col-sm-3 sidenav" style="height: 100%">
+      <h4>Name Surname</h4>
+      <hr>
+      <app-successful-surveys></app-successful-surveys>
+      <hr>
+      <h4>Create my own survey:</h4>
+      <form role="form">
+        <br>
+        <button type="button" class="btn btn-primary" (click)="changeVisibility();" data-toggle="modal">
+          Create a survey
+        </button>
+<!--        <button type="button" class="btn btn-primary" (click)="changeVisibility(); getTopics()" data-toggle="modal">-->
+<!--          Create a survey-->
+<!--        </button>-->
+        <app-admin-block></app-admin-block>
+      </form>
+    </div>
+    <div class="col-sm-9 backgroundImageForUsers"
+         style="border-left:ridge; background-color:rgba(255,94,130,0.36) ">
+      <h4><small>Последние пройденные опросы</small></h4>
+      <hr>
+      <app-complited-survey></app-complited-survey>
+      <app-complited-survey></app-complited-survey>
+      <br><br>
+    </div>
+  </div>
+</div>
+

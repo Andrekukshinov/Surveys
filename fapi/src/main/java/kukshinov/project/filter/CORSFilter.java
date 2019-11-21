@@ -1,4 +1,4 @@
-package com.netcracker.edu.fapi.filter;
+package kukshinov.project.filter;
 
 import org.springframework.stereotype.Component;
 
