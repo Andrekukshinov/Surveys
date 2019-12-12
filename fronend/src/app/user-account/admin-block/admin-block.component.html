@@ -64,7 +64,8 @@
             <form [formGroup]="coverForTopicValidator">
               Topic name:
               <input type="text" formControlName="topicValidator" [ngClass]="
-                         {'is-valid':(coverForTopicValidator.get('topicValidator').valid)}">
+                         {'is-invalid':(coverForTopicValidator.get('topicValidator').valid) &&
+                          (coverForTopicValidator.get('topicValidator').touched)}">
               <div class="invalid-feedback">
                 <div>Name is required</div>
               </div>

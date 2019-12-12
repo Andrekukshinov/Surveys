@@ -12,5 +12,6 @@
     <modules>
 <!--        <module>be</module>-->
         <module>fapi</module>
+        <module>be</module>
     </modules>
 </project>

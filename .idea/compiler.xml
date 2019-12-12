@@ -7,15 +7,18 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="fapi" />
+        <module name="be" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="be" target="1.8" />
       <module name="fapi" target="1.8" />
       <module name="frontend" target="1.5" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="be" options="-parameters" />
       <module name="fapi" options="-parameters" />
     </option>
   </component>

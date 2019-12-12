@@ -23,7 +23,7 @@ export class AdminBlockComponent implements OnInit, OnDestroy {
   topicNameForBE: string;
   questionsPassedFromTemplate: Questions[] = [];
   coverForTopicValidator: FormGroup = new FormGroup({
-    topicValidator: new FormControl('', [Validators.required, Validators.minLength(4)])
+    topicValidator: new FormControl('s', [Validators.required, Validators.minLength(4)])
   });
   surveyInfoGroup: FormGroup = new FormGroup({
     questions: new FormArray([
@@ -146,7 +146,7 @@ export class AdminBlockComponent implements OnInit, OnDestroy {
     this.newTopic = new TopicsForUsers();
     this.newTopic.name = topicName;
     this.newTopic.questions = localQuestStorage;
-    this.newTopic.topicId = ('' + (++AdminBlockComponent.idTopic));
+    // this.newTopic.topicId = ('' + (++AdminBlockComponent.idTopic));
     this.newTopic.isPublic = this.isTrue;
     this.topicsForUsersService.createTopic(this.newTopic);
     this.questionsPassedFromTemplate = [];
